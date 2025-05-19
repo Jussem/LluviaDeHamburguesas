@@ -82,4 +82,19 @@ public class SpriteContainer extends Sprite implements GraphicContainer {
     public List<Sprite> getElements() {
         return elements;
     }
+
+    @Override
+    public void draw(Graphics g) {
+        dibujar(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update() {
+        for (Sprite element : elements) {
+            if (element instanceof SpriteMobile) {
+                ((SpriteMobile) element).mover(); 
+            }
+        }
+    } // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
