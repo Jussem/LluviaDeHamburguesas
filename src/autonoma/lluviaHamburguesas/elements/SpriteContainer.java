@@ -1,35 +1,39 @@
-/**
- * Clase que representa un contenedor de elementos gráficos (sprites) en el juego
- * Lluvia de Hamburguesas. Permite agrupar y gestionar múltiples elementos
- * visuales como una única entidad.
- * 
- * Hereda de Sprite para tener capacidad de dibujado y posicionamiento, e
- * implementa GraphicContainer para proveer funcionalidad de contenedor.
- * 
- *
- * @author Cristian Camilo Salazar Arenas, Juan Sebastian Lopez Guzman y Juan
- * José Morales A.
- * @version 1.0
- * @since 18/05/2025
- */
 package autonoma.lluviaHamburguesas.elements;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa un contenedor de elementos gráficos (sprites) en el juego
+ * <strong>Lluvia de Hamburguesas</strong>. Permite agrupar y gestionar múltiples elementos
+ * visuales como una única entidad lógica.
+ * <p>
+ * Hereda de {@link Sprite} para tener capacidades de dibujo y posicionamiento,
+ * e implementa {@link GraphicContainer} para ofrecer funcionalidad de contenedor.
+ * </p>
+ * 
+ * Esta clase permite manejar grupos de sprites, actualizarlos en conjunto y
+ * renderizarlos en una sola llamada gráfica.
+ * 
+ * @author Cristian Camilo Salazar Arenas,
+ *         Juan Sebastian López Guzmán,
+ *         Juan José Morales A.
+ * @version 1.0
+ * @since 18/05/2025
+ */
 public class SpriteContainer extends Sprite implements GraphicContainer {
 
     /**
-     * Lista que contiene los elementos gráficos agrupados en este contenedor.
+     * Lista de elementos gráficos agrupados dentro de este contenedor.
      */
     protected List<Sprite> elements;
 
     /**
-     * Crea un nuevo contenedor de sprites en la posición especificada.
+     * Constructor que inicializa el contenedor en una posición específica.
      *
-     * @param x Coordenada horizontal inicial (en píxeles)
-     * @param y Coordenada vertical inicial (en píxeles)
+     * @param x Coordenada horizontal (en píxeles) donde se ubicará el contenedor.
+     * @param y Coordenada vertical (en píxeles) donde se ubicará el contenedor.
      * @since 18/05/2025
      */
     public SpriteContainer(int x, int y) {
@@ -38,12 +42,13 @@ public class SpriteContainer extends Sprite implements GraphicContainer {
     }
 
     /**
-     * Dibuja todos los elementos contenidos en este contenedor.
-     * 
-     * Recorre la lista de elementos y llama a su método dibujar() en orden.
-     * 
+     * Dibuja todos los sprites contenidos en este contenedor.
+     * <p>
+     * Este método se encarga de recorrer la lista de elementos y llamar
+     * al método {@code dibujar()} de cada sprite, en el orden en que fueron agregados.
+     * </p>
      *
-     * @param g El contexto gráfico donde se dibujarán los elementos
+     * @param g Contexto gráfico sobre el cual se realizarán los dibujos.
      * @since 18/05/2025
      */
     @Override
@@ -54,9 +59,9 @@ public class SpriteContainer extends Sprite implements GraphicContainer {
     }
 
     /**
-     * Agrega un nuevo elemento gráfico al contenedor.
+     * Agrega un nuevo sprite al contenedor.
      *
-     * @param element El sprite que se agregará al contenedor
+     * @param element Sprite que se desea incluir dentro del contenedor.
      * @since 18/05/2025
      */
     public void addElement(Sprite element) {
@@ -64,9 +69,9 @@ public class SpriteContainer extends Sprite implements GraphicContainer {
     }
 
     /**
-     * Elimina un elemento gráfico del contenedor.
+     * Elimina un sprite previamente agregado al contenedor.
      *
-     * @param element El sprite que se eliminará del contenedor
+     * @param element Sprite que se desea eliminar del contenedor.
      * @since 18/05/2025
      */
     public void removeElement(Sprite element) {
@@ -74,27 +79,41 @@ public class SpriteContainer extends Sprite implements GraphicContainer {
     }
 
     /**
-     * Obtiene la lista de todos los elementos contenidos.
+     * Devuelve la lista actual de sprites contenidos.
      *
-     * @return Lista inmutable con los sprites contenidos
+     * @return Lista con los sprites que conforman el contenedor.
      * @since 18/05/2025
      */
     public List<Sprite> getElements() {
         return elements;
     }
 
+    /**
+     * Llama al método {@code dibujar(Graphics)} para mantener compatibilidad
+     * con interfaces gráficas estándar.
+     *
+     * @param g Contexto gráfico donde se realizará el renderizado.
+     */
     @Override
     public void draw(Graphics g) {
-        dibujar(g); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dibujar(g);
     }
 
+    /**
+     * Actualiza el estado de los elementos contenidos.
+     * <p>
+     * Este método recorre todos los sprites y, si alguno es instancia de
+     * {@link SpriteMobile}, llama a su método {@code mover()} para actualizar su posición.
+     * </p>
+     *
+     * @since 18/05/2025
+     */
     @Override
     public void update() {
         for (Sprite element : elements) {
             if (element instanceof SpriteMobile) {
-                ((SpriteMobile) element).mover(); 
+                ((SpriteMobile) element).mover();
             }
         }
-    } // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
